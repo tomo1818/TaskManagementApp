@@ -1,12 +1,12 @@
-# Clicker Empire Game
+# Task Management App
 
 ## 概要
 
 オンラインの学習プラットフォームであるRecursion内での課題作品。
 
-## ゲームの進め方
-
 ## URL
+
+https://tomo1818.github.io/TaskManagementApp/
 
 ## 使用言語
 

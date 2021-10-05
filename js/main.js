@@ -18,11 +18,12 @@ class Task {
 }
 
 var newTask = {
-  props: ['name', 'task', 'section'],
+  props: ['name', 'task', 'section', 'index'],
   data: function() {
     return {
       curTask: this.task,
       parentSection: this.section,
+      i: this.index,
       starColor: {
         color: ''
       },
@@ -46,7 +47,7 @@ var newTask = {
         <button @click="getFocus" type="button" class="v-icon notranslate v-icon--link mdi mdi-note theme--light"></button>
         <button @click="colorGreen" v-bind:style="checkColor" type="button" class="v-icon notranslate v-icon--link mdi mdi-check-bold theme--light"></button>
         <button @click="colorYellow" v-bind:style="starColor" type="button" class="v-icon notranslate v-icon--link mdi mdi-star theme--light"></button>
-        <button @click="$emit('delete-task', curTask.id)" type="button" class="v-icon notranslate v-icon--link mdi mdi-delete theme--light"></button>
+        <button @click="$emit('delete-task', this.i)" type="button" class="v-icon notranslate v-icon--link mdi mdi-delete theme--light"></button>
       </div>
     </div>
   `,
@@ -107,7 +108,7 @@ var newSection = {
         <input class="shadow full-width" placeholder="セクション名" @input="changeSectionName">
       </div>
       <div>
-        <new-task v-for="task in tasks" v-bind:key="task.id" v-bind:name="sectionName" v-bind:section="curSection" v-bind:task="task" v-on:delete-task="deleteTask"></new-task>
+        <new-task v-for="(task, index) in tasks" v-bind:key="index" v-bind:name="sectionName" v-bind:section="curSection" v-bind:task="task" v-bind:index="index" v-on:delete-task="deleteTask"></new-task>
       </div>
     </div>
     <div class="mt-2-sm">
@@ -123,8 +124,8 @@ var newSection = {
     changeSectionName: function(event) {
       this.sectionName = event.target.value;
     },
-    deleteTask: function(id) {
-      this.tasks.splice(id, 1);
+    deleteTask: function(index) {
+      this.tasks.splice(index, 1)
     }
   }
 }
